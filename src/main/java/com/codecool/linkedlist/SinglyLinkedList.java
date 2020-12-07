@@ -1,18 +1,17 @@
 package com.codecool.linkedlist;
 
 
-
-public class SinglyLinkedList {
+public class SinglyLinkedList<T> {
 
     private class Link {
-        private int value;
+        private T value;
         private Link next;
 
-        Link(int value) {
+        Link(T value) {
             this.value = value;
         }
 
-        int getValue() {
+        T getValue() {
             return value;
         }
 
@@ -34,12 +33,12 @@ public class SinglyLinkedList {
         size = 0;
     }
 
-    public SinglyLinkedList(int value) {
+    public SinglyLinkedList(T value) {
         head = new Link(value);
         size = 1;
     }
 
-    public void add(int value) {
+    public void add(T value) {
         if (head == null) {
             head = new Link(value);
         } else {
@@ -53,7 +52,7 @@ public class SinglyLinkedList {
     }
 
 
-    public int get(int index) {
+    public T get(int index) {
         if (index >= size()) {
             throw new IndexOutOfBoundsException();
         } else {
@@ -67,12 +66,12 @@ public class SinglyLinkedList {
         }
     }
 
-    public int indexOf(int number) {
+    public int indexOf(T number) {
         Link pointed = head;
         int pointer = 0;
         if (pointed == null) return -1;
         while (pointed!= null){
-            if(pointed.getValue() == number){
+            if(pointed.getValue().equals(number)){
                 return pointer;
             }
             pointed = pointed.getNext();
@@ -81,7 +80,7 @@ public class SinglyLinkedList {
         return -1;
     }
 
-    public void insert(int index, int number) {
+    public void insert(int index, T number) {
         if (index<0 || index>size) throw new IndexOutOfBoundsException();
         if (index==size) {add(number);
         }else {

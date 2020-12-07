@@ -7,13 +7,23 @@ public class Main {
     public static void main(String[] args) {
 
 //        SinglyLinkedList testList = new SinglyLinkedList();
-        SinglyLinkedList testList = new SinglyLinkedList();
-        testList.add(4);
-        testList.add(5);
-        testList.add(6);
-        testList.insert(1, 2);
+        SinglyLinkedList<String> testList = new  SinglyLinkedList();
+        testList.add("4");
+        testList.add("5");
+        testList.add("6");
+        testList.insert(1, "2");
         System.out.println(testList.toString());
         System.out.println();
+        SinglyLinkedList<Integer> listUnderTest = new  SinglyLinkedList();
+        listUnderTest.insert(0, 123);
+        listUnderTest.insert(1, 234);
+        listUnderTest.insert(2, 345);
+        listUnderTest.insert(3, 456);
+        listUnderTest.insert(4, 567);
+        listUnderTest.insert(5, 678);
+
+        System.out.println(listUnderTest.toString());
+        System.out.println(listUnderTest.indexOf(234));
 
         System.out.println("Your implementation is correct when there's no failing test after running mvn clean test.");
         if (args.length < 3) {
