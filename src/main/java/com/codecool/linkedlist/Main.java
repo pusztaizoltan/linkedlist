@@ -5,6 +5,16 @@ public class Main {
     private static SinglyLinkedList list;
 
     public static void main(String[] args) {
+
+//        SinglyLinkedList testList = new SinglyLinkedList();
+        SinglyLinkedList testList = new SinglyLinkedList();
+        testList.add(4);
+        testList.add(5);
+        testList.add(6);
+        testList.insert(1, 2);
+        System.out.println(testList.toString());
+        System.out.println();
+
         System.out.println("Your implementation is correct when there's no failing test after running mvn clean test.");
         if (args.length < 3) {
             terminate();

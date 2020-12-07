@@ -1,9 +1,10 @@
 package com.codecool.linkedlist;
 
+
+
 public class SinglyLinkedList {
 
     private class Link {
-
         private int value;
         private Link next;
 
@@ -24,64 +25,91 @@ public class SinglyLinkedList {
         }
     }
 
+
     private Link head;
+    private int size;
 
     public SinglyLinkedList() {
+        head = null;
+        size = 0;
     }
 
+    public SinglyLinkedList(int value) {
+        head = new Link(value);
+        size = 1;
+    }
 
-    /**
-     * Add a new element to the list.
-     * The new element is appended to the current last item.
-     *
-     * @param value value to be appended
-     */
     public void add(int value) {
+        if (head == null) {
+            head = new Link(value);
+        } else {
+            Link last = head;
+            while (last.getNext() != null) {
+                last = last.getNext();
+            }
+            last.setNext(new Link(value));
+        }
+        size++;
     }
 
-    /**
-     * Get a value based on its index.
-     *
-     * @param index the position of requested value
-     * @return value of element at index
-     */
+
     public int get(int index) {
-        return 0;
+        if (index >= size()) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            Link pointed = head;
+            int pointer = 0;
+            while (pointer != index) {
+                pointed = pointed.getNext();
+                pointer++;
+            }
+            return pointed.getValue();
+        }
     }
 
-    /**
-     * Returns the zero-based index of the first occurrence of a value in the list.
-     *
-     * @param number value to be searched
-     * @return Index of 'number' if it's in the list, otherwise -1;
-     */
     public int indexOf(int number) {
-        return 0;
+        Link pointed = head;
+        int pointer = 0;
+        if (pointed == null) return -1;
+        while (pointed!= null){
+            if(pointed.getValue() == number){
+                return pointer;
+            }
+            pointed = pointed.getNext();
+            pointer++;
+        }
+        return -1;
     }
 
-    /**
-     * Inserts a value at an index into the array shifting elements if necessary.
-     *
-     * @param index  Position of the new element
-     * @param number Value to be inserted.
-     */
     public void insert(int index, int number) {
+        if (index<0 || index>size) throw new IndexOutOfBoundsException();
+        if (index==size) {add(number);
+        }else {
+            size++;
+            Link newLink = new Link(number);
+            Link pointed = head;
+            if (index==0) {
+                newLink.setNext(head);
+                head = newLink;
+            } else {
+                Link tail = null;
+                for (int pointer = 0; pointer < size; pointer++) {
+                    if (pointer != index-1) {
+                        pointed = pointed.getNext();
+                    } else {
+                        newLink.setNext(pointed.getNext());
+                        pointed.setNext(newLink);
+                        pointed = pointed.getNext();
+                    }
+                }
+            }
+        }
     }
 
-    /**
-     * Returns with the amount of inserted nodes.
-     *
-     * @return Size of list.
-     */
     public int size() {
-        return 0;
+        return size;
     }
 
-    /**
-     * Removes the element at 'index' from the array.
-     *
-     * @param index Position of value to be deleted.
-     */
     public void remove(int index) {
         if (index == 0) {
             if (head == null) {
@@ -104,5 +132,17 @@ public class SinglyLinkedList {
             throw new IndexOutOfBoundsException();
         }
         elementBeforeIndex.setNext(elementAtIndex.getNext());
+    }
+
+    @Override
+    public String toString(){
+        String enumeration = "[";
+        for (int i = 0; i < size-1; i++) {
+            enumeration += get(i);
+            enumeration += ", ";
+        }
+        enumeration += get(size-1);
+        enumeration +="]";
+        return enumeration;
     }
 }
